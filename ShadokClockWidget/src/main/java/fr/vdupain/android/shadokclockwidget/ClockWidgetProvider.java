@@ -8,6 +8,7 @@ import android.content.Intent;
 
 public class ClockWidgetProvider extends AppWidgetProvider {
 
+
 	@Override
 	public void onDisabled(Context context) {
 		Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
@@ -24,7 +25,7 @@ public class ClockWidgetProvider extends AppWidgetProvider {
 		Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
 		PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, 0);
 		//After after 1 seconds
-		am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+ 100 * 3, 1000 , pi);
+		am.setRepeating(AlarmManager.RTC, System.currentTimeMillis()+ 100 * 3, 1000 , pi);
 	}
 
 }

@@ -1,18 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:background="@drawable/widget_background">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Widget"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/tvTime"
-        style="@android:style/TextAppearance.Medium"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_margin="4dip"
-        android:gravity="center_horizontal|center_vertical"
-        android:textColor="#000000"/>
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-5sp"
+        android:text="00:00"
+        android:textColor="#ffffff"
+        android:textSize="30sp" >
+    </TextView>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/weekday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/time"
+        android:layout_marginTop="-18sp"
+        android:text="weekday"
+        android:textColor="#ffffff"
+        android:textSize="25sp" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/weekday"
+        android:layout_marginTop="-30sp"
+        android:text="28"
+        android:textColor="#ffffff"
+        android:textSize="50sp">
+    </TextView>
+
+    <TextView
+        android:id="@+id/month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/day"
+        android:layout_marginTop="17sp"
+        android:layout_toRightOf="@+id/day"
+        android:text="month"
+        android:textColor="#ffffff"
+        android:textSize="15sp" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/day"
+        android:layout_toRightOf="@+id/day"
+        android:text="2011"
+        android:textColor="#ffffff"
+        android:textSize="30sp" >
+    </TextView>
+
+</RelativeLayout>

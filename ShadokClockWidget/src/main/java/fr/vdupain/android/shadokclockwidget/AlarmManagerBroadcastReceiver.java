@@ -8,10 +8,15 @@ import android.content.Intent;
 import android.os.PowerManager;
 import android.widget.RemoteViews;
 
+import java.text.DateFormatSymbols;
 import java.util.Calendar;
 
 public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
-    Calendar cal = Calendar.getInstance();
+    public static String WEEKDAYS_NAMES[] = new DateFormatSymbols()
+            .getWeekdays();
+    public static String MONTHS_NAMES[] = new DateFormatSymbols().getMonths();
+
+    Calendar calendar = Calendar.getInstance();
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
@@ -23,13 +28,23 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 		//You can do the processing here update the widget/remote views.
 		RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
 				R.layout.clock_widget_layout);
-        cal.setTimeInMillis(System.currentTimeMillis());
-        int hour = cal.get(Calendar.HOUR);
-        int minute = cal.get(Calendar.MINUTE);
-        int second = cal.get(Calendar.SECOND);
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        int hour = calendar.get(Calendar.HOUR);
+        int minute = calendar.get(Calendar.MINUTE);
+        int second = calendar.get(Calendar.SECOND);
         //String time = Utility.getCurrentTime("hh:mm:ss a");
         String time = encode(hour) + ":" + encode(minute) + ":" + encode(second);
-        remoteViews.setTextViewText(R.id.tvTime, time);
+        remoteViews.setTextViewText(R.id.time, time);
+        remoteViews.setTextViewText(R.id.weekday, WEEKDAYS_NAMES[calendar
+                .get(Calendar.DAY_OF_WEEK)].toUpperCase());
+        remoteViews.setTextViewText(R.id.day,
+                Integer.toString(calendar.get(Calendar.DAY_OF_MONTH)));
+        remoteViews.setTextViewText(R.id.month,
+                MONTHS_NAMES[calendar.get(Calendar.MONTH)].toUpperCase());
+        remoteViews.setTextViewText(R.id.year,
+                Integer.toString(calendar.get(Calendar.YEAR)));
+
+
 		//Toast.makeText(context, time, Toast.LENGTH_LONG).show();
 		ComponentName thiswidget = new ComponentName(context, ClockWidgetProvider.class);
 		AppWidgetManager manager = AppWidgetManager.getInstance(context);
@@ -40,7 +55,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
     public static String encode(int base10) {
         String converted = Integer.toString(base10, 4);
-        return converted.replaceAll("0", "GA").replaceAll("1", "BU").replaceAll("2", "ZO").replaceAll("3", "MEU");
+        return converted.replaceAll("0", "O").replaceAll("1", "-").replaceAll("2", "⌋").replaceAll("3", "Meu");
     }
 
 
